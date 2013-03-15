@@ -7,6 +7,7 @@
 
     var pluginName = "engage",
         defaults = {
+            offset : 0,
             contents : ["comment", "newsletter"]
         };
 
@@ -27,24 +28,27 @@
         loadContent : function () {
             var self = this,
                 colClass = "column" + this.options.contents.length,
-                time = this.getTimes();
+                time = this.getTimes(),
+                $el  = $(self.element);
+
+            this.distanceTop = ($el.offset().top + $el.height()) - ($(window).height()/2)-100 + this.options.offset;
+
+            $(document).on("click.engage", "#footerEngageContainer .btn_x", function(){ self.hideFull(); return false; });
 
             $.each(this.options.contents, function(i, type){
                 var contents = $.engage.contents;
                 if(contents[type] && contents[type].init){
-                    contents[type].options = this.options;
+                    contents[type].options =  $.extend( {}, contents[type].defaults, self.options[type] );
                     var $content  = $(contents[type].init(time)).addClass(colClass);
                     self.allContent.push($content);
                 }
             });
         },
         loadScroller : function () {
-            var self = this,
-                $el  = $(self.element);
+            var self = this;
 
             $(window).on("scroll.engage", function() {
-              var distanceTop = $el.offset().top + $el.height();
-              if ($(window).scrollTop() > distanceTop) {
+              if ($(window).scrollTop() > self.distanceTop) {
                 self.show();
               }else{
                 self.hide();
@@ -66,14 +70,24 @@
         },
         show : function(){
             if($("#footerEngageContainer").length) return false;
-            var $content = $(this.getHTML());
+            var $content = $(this.getHTML()),
+                self = this;
+
             $.each(this.allContent, function(i , html){
                 $content.find("#footerEngage").append(html);
+                if(i !== (self.allContent.length -1)){
+                    $content.find("#footerEngage").append("<div class='separator'></div>");
+                }
             });
             $("body").append($content);
             $("#footerEngage").animate({
                 marginTop:0
             });
+        },
+        hideFull : function () {
+            this.noshow = true;
+            this.destroy();
+            this.hide();
         },
         hide : function () {
             if(!$("#footerEngageContainer").length) return false;
@@ -86,8 +100,15 @@
         getHTML : function(texts){
             return "<div id='footerEngageContainer'>\
                     <div id='footerEngage'>\
+                        <a href='#' class='btn_x'>&#215;</a>\
                     </div>\
                 </div>";
+        },
+        destroy : function () {
+            $(document).trigger("engage.destroy");
+            $(document).off("click.engage");
+            $(window).off("scroll.engage");
+
         }
     };
 

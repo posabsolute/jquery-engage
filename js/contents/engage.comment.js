@@ -1,76 +1,75 @@
 $.engage.contents.comment = {
     defaults : {
         url : '/wp-comments-post.php',
+        mode : "",
         text : {
             defaults : {
-                title : "Have your say!"
+                title : "Have your say!",
+                thanks : "Thank you for contributing, your comment will be added shortly."
             },
             morning : {
-                title : "Morning! Have some opinions on this article?"
+                title : "Morning! Have some opinions on this article?",
+                thanks : "Thank you for contributing, your comment will be added shortly."
             },
             night : {
-                title : "Have your say!"
-            },
-            weekend : {
-                title : "Have your say!"
+                title : "Have your say!",
+                thanks : "Thank you for contributing, your comment will be added shortly."
             }
         }
     },
     init : function (time) {
-        var self = this;
         this.loadEvents();
-        this.options =  $.extend( {}, this.defaults, this.options );
-        return this.getHTML(this.options.text, time);
+        return this.getHTML(this.options, time);
     },
     loadEvents : function () {
-        $(document).on("submit.engage", "#footerCommentForm", function(){
-            var data = $(this).serialize();
-            $.ajax({
-              url: self.options.url,
-              type: 'POST',
-              dataType: 'html',
-              data: data,
-              success: function(data, textStatus, xhr) {
-                //called when successful
-              },
-              error: function(xhr, textStatus, errorThrown) {
-                //called when there is an error
-              }
-            });
-        });
+        var self = this;
+        $(document).on("focus.engage", "#footerCommentForm textarea", function(){ self.showFields(); });
+        $(document).on("submit.engage", "#footerCommentForm", function(){ self.postData(); return false;});
+        $(document).on("engage.destroy", function(){ self.destroy(); return false;});
     },
     destroy : function() {
          $(document).off("submit.engage");
+         $(document).off("focus.engage");
     },
-    postComment : function () {
+    showFields : function(){
+        $(".hideFooterComment").slideDown();
+        $("#footerEngageContainer, #footerEngage").animate({height:380});
+    },
+    postData : function () {
+        $("#footerCommentForm").find("[name=comment_post_ID]").val($("#comment_post_ID").val());
+        $("#footerCommentForm").find("[name=comment_parent]").val($("#comment_parent").val());
         var data = $("#footerCommentForm").serialize();
         $.ajax({
-          url: this.options.commentUrl,
+          url: this.options.url,
           type: 'POST',
           dataType: 'html',
           data: data,
           success: function(data, textStatus, xhr) {
-            //called when successful
+             $("#footerCommentForm").hide();
+             $("#footerEngageContainer .thankyou").show();
+             $("#footerEngageContainer, #footerEngage").animate({height:200});
           },
           error: function(xhr, textStatus, errorThrown) {
             //called when there is an error
           }
         });
-        
     },
-    getHTML : function (texts, time) {
+    getHTML : function (options, time) {
         return "<div class='comments'>\
-                    <div class='commentsTitle'>"+texts[time].title+"</div>\
-                    <form id='footerCommentForm'>\
+                    <div class='commentsTitle'>"+options.text[time].title+"</div>\
+                    <form id='footerCommentForm' method='post' action='"+options.url+"'>\
+                        <textarea class='text' name='comment' placeholder='Add your comment'></textarea>\
                         <div class='hideFooterComment' style='display:none;'>\
-                            <label>Name</label>\
-                            <input type='text' name='name' />\
-                            <label>Email</label>\
-                            <input type='text' name='email' />\
+                            <label>Name</label><br />\
+                            <input type='text' class='text' name='author' />\
+                            <label>Email</label><br />\
+                            <input type='text' class='text' name='email' />\
+                            <input type='hidden' name='comment_post_ID' value=''>\
+                            <input type='hidden' name='comment_parent' value=''>\
                         </div>\
-                        <textarea class='text' placeholder='Add your comment'></textarea>\
-                        <button class='btn' type='submit'>Send comment</button>\
+                        <button class='btn btn-warning' type='submit'>Send comment</button>\
                     </form>\
+                    <div class='thankyou' style='display:none; font-style:italic; color:#555;'>"+options.text[time].thanks+"</div>\
                 </div>";
     }
 };

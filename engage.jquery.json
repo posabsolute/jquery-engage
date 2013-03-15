@@ -1,0 +1,29 @@
+{
+    "name": "engage",
+    "title": "Engage better your blog readers",
+    "description": "This plugin add a social toolbar when the reader finish reading an article. This toolbar contains customizable zones (comments, subscribe newsletter & share social)",
+    "keywords": [
+        "social",
+        "ui",
+        "newsletter",
+        "blog",
+        "share",
+        "comment"
+    ],
+    "version": "0.1.0",
+    "author": {
+        "name": "Cedric Dugas",
+        "url": "http://www.position-relative.net"
+    },
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/MIT"
+        }
+    ],
+    "bugs": "https://github.com/posabsolute/jquery-engage/issues",
+    "homepage": "https://github.com/posabsolute/jquery-engage",
+    "dependencies": {
+        "jquery": ">=1.9"
+    }
+}

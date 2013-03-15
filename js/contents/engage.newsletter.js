@@ -1,15 +1,15 @@
 $.engage.contents.newsletter = {
     defaults : {
-        url : '/wp-comments-post.php',
+        url : '',
         text : {
             defaults : {
-                title : "Liked this article? Get more content right in your mailbox"
+                title : "Liked this article? <span>Get more content right in your mailbox</span>"
             },
             morning : {
-                title : "Need more coffeine? Get more content right in your mailbox"
+                title : "Need more coffeine? <span>Get more content right in your mailbox</span>"
             },
             night : {
-                title : "Doing some overtime? Get more content right in your mailbox"
+                title : "Doing some overtime? <span>Get more content right in your mailbox</span>"
             },
             weekend : {
                 commentTitle : "Have your say!"
@@ -17,32 +17,17 @@ $.engage.contents.newsletter = {
         }
     },
     init : function (time) {
-        var self = this;
         this.loadEvents();
-        this.options =  $.extend( {}, this.defaults, this.options );
-        return this.getHTML(this.options.text, time);
+        return this.getHTML(this.options, time);
     },
     loadEvents : function () {
-        $(document).on("submit.engage", "#footerCommentForm", function(){
-            var data = $(this).serialize();
-            $.ajax({
-              url: self.options.url,
-              type: 'POST',
-              dataType: 'html',
-              data: data,
-              success: function(data, textStatus, xhr) {
-                //called when successful
-              },
-              error: function(xhr, textStatus, errorThrown) {
-                //called when there is an error
-              }
-            });
-        });
+      var self = this;
+      $(document).on("engage.destroy", function(){ self.destroy(); return false;});
     },
     destroy : function() {
          $(document).off("submit.engage");
     },
-    postComment : function () {
+    post : function () {
         var data = $("#footerCommentForm").serialize();
         $.ajax({
           url: this.options.commentUrl,
@@ -56,14 +41,15 @@ $.engage.contents.newsletter = {
             //called when there is an error
           }
         });
-        
     },
-    getHTML : function (texts, time) {
-        return "<div class='comments'>\
-                    <div class='newsletterTitle'>"+texts[time].title+"</div>\
-                    <form id='footerNewsletterForm'>\
-                        <input type='text' class='text' placeholder='Email'><br />\
-                        <button class='btn' type='submit'>Subscribe</button>\
+    getHTML : function (options, time) {
+        return "<div class='newsletter'>\
+                    <div class='newsletterTitle'>"+options.text[time].title+"</div>\
+                    <form id='footerNewsletterForm' method='post' action='"+options.url+"'>\
+                        <input type='text' name='email' class='text' placeholder='Email'>\
+                        <input type='hidden' name='goto' value='' />\
+                        <input type='hidden' name='iehack' value='&#9760;' />\
+                        <button class='btn  btn-warning' type='submit'>Subscribe</button>\
                     </form>\
                 </div>";
     }
