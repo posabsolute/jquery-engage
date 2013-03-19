@@ -9,9 +9,9 @@ Example : http://www.position-absolute.com/?p=4449
 
 Include the css & js.
 
-	<script src="js/dist/jquery.behaviorminer.min.js" type="text/javascript"></script>
-	<!-- below is the google analitycs plugin -->
-	<script src="js/connectors/ga.js" type="text/javascript"></script>
+	<script src="js/dist/jquery.engage.min.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="css/jquery.engage.css">
+
 
 After you can instanciate the plugin on the article container:
 
