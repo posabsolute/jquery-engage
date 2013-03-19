@@ -19,17 +19,20 @@ After you can instanciate the plugin on the article container:
 
 
 ## Options
+The options shown below are the current default in the plugin
 Example:
 
 	<script>
 		{
             offset: 0, // change position
-            contents : ["comment", "newsletter"], // content shown in the toolbar
+            contents : ["comment","share", "newsletter"], // content shown in the toolbar
             newsletter : {
             	url : "http://www.mailchimp.com/mylisttoken" // url where the form will submit
             },
             share: :{
-            	buttons : ['linkedin', 'twitter', 'facebook', 'reddit'] // share links shown
+            	buttons : ['linkedin', 'twitter', 'facebook', 'reddit'], // share links shown
+            	title : document.title, // default shared title
+            	url : location.href // default shared link
             },
             // text example
             comment : {
@@ -60,6 +63,8 @@ Help you better position when the toolbar is shown, negative number are allowed.
 ### contents (array)
 
 Content zone shown into the toolbar by order. There is a maximum of 3 zones shown at the same time (2 or 3).  
+
+
 
 ### Changing text
 
