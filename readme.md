@@ -20,7 +20,6 @@ After you can instanciate the plugin on the article container:
 
 ## Options
 The options shown below are the current default:
-Example:
 
 	<script>
 		{
