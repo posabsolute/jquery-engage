@@ -12,6 +12,29 @@
 #footerEngageContainer iframe {
   display: none !important;
 }
+#footerEngageContainer .share-container {
+  margin-left: 5px;
+}
+#footerEngageContainer .share-buttons {
+  display: inline-block;
+  width: 122px;
+  height: 42px;
+  text-indent: -9999px;
+  text-decoration: none;
+  margin: 0 5px 10px 0;
+}
+#footerEngageContainer .share-buttons.share-facebook {
+  background: url(../images/share_facebook.png) top left no-repeat;
+}
+#footerEngageContainer .share-buttons.share-reddit {
+  background: url(../images/share_reddit.png) top left no-repeat;
+}
+#footerEngageContainer .share-buttons.share-twitter {
+  background: url(../images/share_twitter.png) top left no-repeat;
+}
+#footerEngageContainer .share-buttons.share-linkedin {
+  background: url(../images/share_linkedin.png) top left no-repeat;
+}
 #footerEngageContainer #footerEngage {
   position: relative;
   box-shadow: 0px -1px 10px rgba(50, 50, 50, 0.2);
@@ -26,6 +49,9 @@
   border-right: 1px solid #ccc;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
+}
+#footerEngageContainer #footerEngage.containerColumn3 {
+  width: 990px;
 }
 #footerEngageContainer .thankyou {
   font-size: 14px;
@@ -44,19 +70,24 @@
   color: #faa732;
 }
 #footerEngageContainer #footerEngage .commentsTitle {
+  padding-top: 6px;
   background: url(../images/title_comment.png) top left no-repeat;
-  line-height: 47px;
 }
 #footerEngageContainer #footerEngage .newsletterTitle {
   padding-top: 6px;
   height: 54px !important;
   background: url(../images/title_newsletter.png) top left no-repeat;
 }
+#footerEngageContainer #footerEngage .socialTitle {
+  padding-top: 6px;
+  background: url(../images/title_social.png) top left no-repeat;
+}
 #footerEngageContainer #footerEngage .commentsTitle,
-#footerEngageContainer #footerEngage .newsletterTitle {
+#footerEngageContainer #footerEngage .newsletterTitle,
+#footerEngageContainer #footerEngage .socialTitle {
   font-size: 18px;
   font-weight: bold;
-  padding-left: 65px;
+  padding-left: 60px;
   height: 60px;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   color: #3a3a3a;
@@ -64,7 +95,8 @@
   display: block;
 }
 #footerEngageContainer #footerEngage .commentsTitle span,
-#footerEngageContainer #footerEngage .newsletterTitle span {
+#footerEngageContainer #footerEngage .newsletterTitle span,
+#footerEngageContainer #footerEngage .socialTitle span {
   color: #999;
   display: block;
   font-weight: bold;
@@ -92,7 +124,8 @@
 }
 #footerEngageContainer #footerEngage .column3 {
   float: left;
-  width: 33%;
+  width: 30%;
+  padding: 10px;
 }
 #footerEngageContainer #footerEngage .column2 {
   padding: 10px;
@@ -235,7 +268,7 @@
 #footerEngageContainer textarea.text {
   display: block;
   height: 20px;
-  width: 349px;
+  width: 95%;
   padding: 6px 7px;
   margin-bottom: 10px;
   font-size: 14px;

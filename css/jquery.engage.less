@@ -7,6 +7,19 @@
 	overflow:hidden;
 
 iframe{display:none !important;}
+  .share-container{margin-left:5px;}
+  .share-buttons{
+    display:inline-block;
+    width:122px; height:42px;
+    text-indent:-9999px;
+    text-decoration:none;
+    margin: 0 5px 10px 0;
+    &.share-facebook{background:url(../images/share_facebook.png) top left no-repeat;}
+    &.share-reddit{background:url(../images/share_reddit.png) top left no-repeat;}
+    &.share-twitter{background:url(../images/share_twitter.png) top left no-repeat;}
+    &.share-linkedin{background:url(../images/share_linkedin.png) top left no-repeat;}
+  }
+
 
 
 #footerEngage{
@@ -22,6 +35,9 @@ iframe{display:none !important;}
 	border-right:1px solid #ccc;
 	border-top-left-radius:6px;
 	border-top-right-radius:6px;
+  &.containerColumn3{
+    width:990px;
+  }
 }
 
 .thankyou{
@@ -39,18 +55,23 @@ iframe{display:none !important;}
     &:hover{color:#faa732;}
 }
 #footerEngage .commentsTitle{
+  padding-top:6px;
   background:url(../images/title_comment.png) top left no-repeat;
-  line-height:47px;
+
 }
 #footerEngage .newsletterTitle{
   padding-top:6px;
   height:54px !important;
   background:url(../images/title_newsletter.png) top left no-repeat;
 }
-#footerEngage .commentsTitle, #footerEngage .newsletterTitle{
+#footerEngage .socialTitle{
+  padding-top:6px;
+  background:url(../images/title_social.png) top left no-repeat;
+}
+#footerEngage .commentsTitle, #footerEngage .newsletterTitle, #footerEngage .socialTitle{
   font-size:18px;
   font-weight:bold;
-  padding-left:65px;
+  padding-left:60px;
   height:60px;
   text-shadow: 0 1px 1px rgba(255,255,255,.75);
   color:#3a3a3a;
@@ -78,7 +99,7 @@ iframe{display:none !important;}
 
 	#footerEngage .column1{width:100%;}
 	#footerEngage .column2{float:left; width:46%;}
-	#footerEngage .column3{float:left; width:33%;}
+	#footerEngage .column3{float:left; width:30%; padding:10px;}
 
 
 
@@ -226,7 +247,7 @@ iframe{display:none !important;}
 input.text, textarea.text{
   display: block;
   height: 20px;
-  width:349px;
+  width:95%;
   padding: 6px 7px;
   margin-bottom: 10px;
   font-size: 14px;

@@ -8,7 +8,7 @@
     var pluginName = "engage",
         defaults = {
             offset : 0,
-            contents : ["comment", "newsletter"]
+            contents : ["comment", "share", "newsletter"]
         };
 
     function Plugin( element, options ) {
@@ -69,20 +69,23 @@
             return time;
         },
         show : function(){
-            if($("#footerEngageContainer").length) return false;
-            var $content = $(this.getHTML()),
-                self = this;
+            if(!$("#footerEngageContainer").length) {
+                 var containerClass = "containerColumn" + this.options.contents.length,
+                    $content = $(this.getHTML(containerClass)),
+                    self = this;
 
-            $.each(this.allContent, function(i , html){
-                $content.find("#footerEngage").append(html);
-                if(i !== (self.allContent.length -1)){
-                    $content.find("#footerEngage").append("<div class='separator'></div>");
-                }
-            });
-            $("body").append($content);
-            $("#footerEngage").animate({
-                marginTop:0
-            });
+                $.each(this.allContent, function(i , html){
+                    $content.find("#footerEngage").append(html);
+                    if(i !== (self.allContent.length -1)){
+                        $content.find("#footerEngage").append("<div class='separator'></div>");
+                    }
+                });
+                $("body").append($content);
+                $("#footerEngage").animate({
+                    marginTop:0
+                });
+                $(document).trigger("engage.show");
+            }
         },
         hideFull : function () {
             this.noshow = true;
@@ -94,24 +97,24 @@
             $("#footerEngage").animate({
                 marginTop:205
             }, function(){
+                $(document).trigger("engage.hide");
                 $("#footerEngageContainer").remove();
             });
         },
-        getHTML : function(texts){
-            return "<div id='footerEngageContainer'>\
-                    <div id='footerEngage'>\
+        getHTML : function(containerClass){
+            var text = "<div id='footerEngageContainer'>\
+                    <div id='footerEngage' class='"+containerClass+"'>\
                         <a href='#' class='btn_x'>&#215;</a>\
                     </div>\
                 </div>";
+            return text;
         },
         destroy : function () {
             $(document).trigger("engage.destroy");
             $(document).off("click.engage");
             $(window).off("scroll.engage");
-
         }
     };
-
     $[pluginName] = {
         contents : {}
     };

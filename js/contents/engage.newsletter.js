@@ -6,13 +6,10 @@ $.engage.contents.newsletter = {
                 title : "Liked this article? <span>Get more content right in your mailbox</span>"
             },
             morning : {
-                title : "Need more coffeine? <span>Get more content right in your mailbox</span>"
+                title : "Need more caffeine? <span>Get more content right in your mailbox</span>"
             },
             night : {
                 title : "Doing some overtime? <span>Get more content right in your mailbox</span>"
-            },
-            weekend : {
-                commentTitle : "Have your say!"
             }
         }
     },
@@ -34,16 +31,16 @@ $.engage.contents.newsletter = {
           type: 'POST',
           dataType: 'html',
           data: data,
-          success: function(data, textStatus, xhr) {
+          success: function() {
             //called when successful
           },
-          error: function(xhr, textStatus, errorThrown) {
+          error: function() {
             //called when there is an error
           }
         });
     },
     getHTML : function (options, time) {
-        return "<div class='newsletter'>\
+        var text = "<div class='newsletter'>\
                     <div class='newsletterTitle'>"+options.text[time].title+"</div>\
                     <form id='footerNewsletterForm' method='post' action='"+options.url+"'>\
                         <input type='text' name='email' class='text' placeholder='Email'>\
@@ -52,5 +49,6 @@ $.engage.contents.newsletter = {
                         <button class='btn  btn-warning' type='submit'>Subscribe</button>\
                     </form>\
                 </div>";
+        return text;
     }
 };

@@ -25,6 +25,12 @@ Example:
 		{
             offset: 0, // change position
             contents : ["comment", "newsletter"], // content shown in the toolbar
+            newsletter : {
+            	url : "http://www.mailchimp.com/mylisttoken" // url where the form will submit
+            },
+            share: :{
+            	buttons : ['linkedin', 'twitter', 'facebook', 'reddit'] // share links shown
+            },
             // text example
             comment : {
 	            text : {
@@ -52,15 +58,19 @@ Help you better position when the toolbar is shown, negative number are allowed.
 
 ### contents (array)
 
-Content zone shown into the toolbar by order. For example you could change comment by social
+Content zone shown into the toolbar by order. There is a maximum of 3 zones shown at the same time (2 or 3).  
 
 ### Changing text
 
 The plugin allowed customized text depending of the time of the day, this can help you optimize users engagement by better connecting with the user.
 
-Each content type can be customized like shown above. Check all the text options in the content js file on the contents folder.
+Each content type can be customized like shown above. Check all the text options in the content js file in the contents folder.
 
-## Adding other contents
+## Connecting newsletter subscription to mailchimp, cakemail, etc.
+
+The comment plugin take a url option where the form will be posted. Normally a user must be double opt-in to be added to a newsletter list, so I do not provide an api wrapper that automatically add emails to a list.
+
+## Creating other content
 
 Adding other content type like adding to bookmark or related article is easy. First add a js file in the contents folder, you can base yourself on the comment plugin, here how to namespace it.
 
@@ -76,6 +86,14 @@ When launching the plugin to not forget your content name name to the contents o
 When the script load your content it will call the *init()* method.  The options are automatically passed to your plugin, you can retrieve them using *this.options*. The time (string, "morning", "night", "default") is given as parameter to the init function so you can use this information to better target your text.
 
 You *must* return the parsed html content to the init function.
+
+### Events helper
+
+There are 3 chatchable events for your plugin.
+
+engage.show // when the toolbar is shown
+engage.hide // when the toolbar is hided
+engage.destroy // when the plugin is destroyed
 
 ### Adding your new content to the minified file
 

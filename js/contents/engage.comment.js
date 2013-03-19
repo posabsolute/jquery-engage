@@ -8,7 +8,7 @@ $.engage.contents.comment = {
                 thanks : "Thank you for contributing, your comment will be added shortly."
             },
             morning : {
-                title : "Morning! Have some opinions on this article?",
+                title : "Morning! Want to comment?",
                 thanks : "Thank you for contributing, your comment will be added shortly."
             },
             night : {
@@ -25,7 +25,8 @@ $.engage.contents.comment = {
         var self = this;
         $(document).on("focus.engage", "#footerCommentForm textarea", function(){ self.showFields(); });
         $(document).on("submit.engage", "#footerCommentForm", function(){ self.postData(); return false;});
-        $(document).on("engage.destroy", function(){ self.destroy(); return false;});
+        $(document).on("engage.destroy", function(){ self.destroy(); });
+        $(document).on("engage.hide",  function(){ $(".hideFooterComment").hide(); });
     },
     destroy : function() {
          $(document).off("submit.engage");
@@ -44,18 +45,18 @@ $.engage.contents.comment = {
           type: 'POST',
           dataType: 'html',
           data: data,
-          success: function(data, textStatus, xhr) {
+          success: function() {
              $("#footerCommentForm").hide();
              $("#footerEngageContainer .thankyou").show();
              $("#footerEngageContainer, #footerEngage").animate({height:200});
           },
-          error: function(xhr, textStatus, errorThrown) {
+          error: function() {
             //called when there is an error
           }
         });
     },
     getHTML : function (options, time) {
-        return "<div class='comments'>\
+        var text = "<div class='comments'>\
                     <div class='commentsTitle'>"+options.text[time].title+"</div>\
                     <form id='footerCommentForm' method='post' action='"+options.url+"'>\
                         <textarea class='text' name='comment' placeholder='Add your comment'></textarea>\
@@ -71,5 +72,6 @@ $.engage.contents.comment = {
                     </form>\
                     <div class='thankyou' style='display:none; font-style:italic; color:#555;'>"+options.text[time].thanks+"</div>\
                 </div>";
+        return text;
     }
 };
