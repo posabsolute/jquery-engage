@@ -8,7 +8,7 @@
     var pluginName = "engage",
         defaults = {
             offset : 0,
-            contents : ["share", "comment" ]
+            contents : ["comment", "share", "newsletter"]
         };
 
     function Plugin( element, options ) {

@@ -62,22 +62,22 @@ Content zone shown into the toolbar by order. There is a maximum of 3 zones show
 
 ### Changing text
 
-The plugin allowed customized text depending of the time of the day, this can help you optimize users engagement by better connecting with the user.
+The plugin allow customized text depending of the time of the day, this can help you optimize users engagement by better connecting with the user.
 
 Each content type can be customized like shown above. Check all the text options in the content js file in the contents folder.
 
 ## Connecting newsletter subscription to mailchimp, cakemail, etc.
 
-The comment plugin take a url option where the form will be posted. Normally a user must be double opt-in to be added to a newsletter list, so I do not provide an api wrapper that automatically add emails to a list.
+The comment plugin take a url option where the form will be posted. I do not provide an ajax function for now, but there is a mailchimp wrapper included with this plugin.
 
 ## Creating other content
 
-Adding other content type like adding to bookmark or related article is easy. First add a js file in the contents folder, you can base yourself on the comment plugin, here how to namespace it.
+Adding other content types like bookmark or related article is easy. First add a js file in the contents folder, you can use the comment plugin as a reference, here how to namespace it.
 
 	$.engage.contents.yourname
 
 
-When launching the plugin to not forget your content name name to the contents option
+When launching the plugin to not forget to add your content name to the options.
 
 	<script>$(".article").engage({contents: ['yourname','newsletter']});</script>
 
@@ -97,13 +97,13 @@ engage.destroy // when the plugin is destroyed
 
 ### Adding your new content to the minified file
 
-You can always simply add your behavior file below the plugin in the html document like this:
+You can always simply add your file below the plugin in the html document like this:
 
 	<script src="js/jquery.enagage.min.js" type="text/javascript" charset="utf-8"></script>
 	<!-- below is the google analitycs plugin -->
 	<script src="js/contents/name.js" type="text/javascript" charset="utf-8"></script>
 
-Or you can compile your behavior in the minified script using grunt, first *load npm install* to install dependencies, then just do grunt and it's all automatic. You must comply with jslint before a compilation is completed. If that sound complicated please check gruntjs, it should be simple to pick it up from there.
+Or you can minify it using grunt, first *load npm install* to install dependencies, then just do grunt and it's all automatic. You must comply with jslint before a compilation is completed. If that sound complicated please check gruntjs, it should be simple to pick it up from there.
 
 
 ## License (MIT)
