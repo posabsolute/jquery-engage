@@ -7,6 +7,7 @@
 
     var pluginName = "engage",
         defaults = {
+            scrollhide : false,
             offset : 0,
             contents : ["comment", "share", "newsletter"]
         };
@@ -51,7 +52,7 @@
               if ($(window).scrollTop() > self.distanceTop) {
                 self.show();
               }else{
-                self.hide();
+                if(self.options.scrollhide) self.hide();
               }
             });
         },
