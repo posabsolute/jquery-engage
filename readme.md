@@ -33,6 +33,7 @@ Example:
             },
             // text example
             comment : {
+            	url : "/wp-comments-post.php",
 	            text : {
 		            defaults : {
 		                title : "Have your say!",
