@@ -25,6 +25,7 @@ Example:
 	<script>
 		{
             offset: 0, // change position
+            scrollhide : false // hide when the user scroll back to the top of the article
             contents : ["comment","share", "newsletter"], // content shown in the toolbar
             newsletter : {
             	url : "http://www.mailchimp.com/mylisttoken" // url where the form will submit
